@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Patch Sheet</title>
+<style>
+  :root{
+    --bg: #171615;
+    --panel: #1f1e1c;
+    --panel-raised: #262421;
+    --line: #38352f;
+    --amber: #c89b3c;
+    --amber-dim: #8a6d2c;
+    --green: #7fbf7f;
+    --red: #c0605a;
+    --text: #ede7da;
+    --text-dim: #a39d8c;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  .masthead {
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom: 2px solid var(--amber); padding-bottom: 14px; margin-bottom: 22px;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .masthead h1 {
+    font-family: var(--sans); font-weight: 800; letter-spacing: 0.04em;
+    text-transform: uppercase; font-size: 22px; margin: 0;
+  }
+  .masthead .tag {
+    font-family: var(--mono); color: var(--amber); font-size: 12px; letter-spacing: 0.08em;
+  }
+
+  .tabs { display:flex; gap: 4px; margin-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .tab {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    background: none; border: none; color: var(--text-dim); padding: 10px 16px; cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  .tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .tab:hover { color: var(--text); }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 3px; padding: 20px; margin-bottom: 18px; }
+  .panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin: 0 0 14px; font-weight: 700; }
+
+  label { display:block; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 4px; }
+  input[type=text], input[type=email], select, textarea {
+    width: 100%; background: var(--panel-raised); border: 1px solid var(--line); color: var(--text);
+    padding: 8px 9px; border-radius: 2px; font-family: var(--sans); font-size: 13px;
+  }
+  input:focus, select:focus, textarea:focus { outline: 1px solid var(--amber); border-color: var(--amber); }
+
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 640px){ .grid2 { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); text-align: left; padding: 6px 6px; border-bottom: 1px solid var(--line); }
+  td { padding: 6px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .ch-num { font-family: var(--mono); color: var(--amber); font-weight: 700; width: 34px; text-align:center; }
+  .phantom-badge { font-family: var(--mono); font-size: 10px; color: var(--green); border:1px solid var(--green); border-radius:2px; padding: 2px 5px; white-space:nowrap; }
+  .checkbox-cell { text-align:center; }
+
+  .row-actions { display:flex; gap:8px; margin-top: 10px; }
+  button.btn {
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;
+    background: var(--panel-raised); color: var(--text); border: 1px solid var(--line);
+    padding: 8px 14px; border-radius: 2px; cursor: pointer;
+  }
+  button.btn:hover { border-color: var(--amber); color: var(--amber); }
+  button.btn.primary { background: var(--amber); color: #171615; border-color: var(--amber); font-weight: 700; }
+  button.btn.primary:hover { background: #dcae4c; }
+  button.btn.danger:hover { border-color: var(--red); color: var(--red); }
+  button.btn.small { padding: 4px 9px; font-size: 11px; }
+
+  .sub-tabs { display:flex; gap: 6px; margin-bottom: 16px; }
+  .sub-tab { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 12px; border: 1px solid var(--line); background: var(--panel-raised); color: var(--text-dim); cursor:pointer; border-radius: 2px; }
+  .sub-tab.active { color: var(--amber); border-color: var(--amber); }
+
+  .sub-card { background: var(--panel-raised); border: 1px solid var(--line); border-radius: 2px; padding: 12px 14px; margin-bottom: 10px; }
+  .sub-card-head { display:flex; justify-content: space-between; align-items:center; cursor:pointer; }
+  .sub-card-head .name { font-weight: 700; }
+  .sub-card-head .meta { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+  .sub-card-body { margin-top: 10px; display:none; }
+  .sub-card-body.open { display:block; }
+
+  .inv-cat { margin-bottom: 18px; }
+  .inv-cat h3 { font-family: var(--mono); font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.05em; margin: 0 0 8px; }
+  .inv-item-row { display:flex; gap:8px; align-items:center; margin-bottom: 6px; }
+  .inv-item-row input[type=text]{ flex: 1; }
+  .inv-item-row input[type=text].qty { flex: 0 0 70px; text-align:center; }
+
+  .pick-row td.status-ok { color: var(--green); font-family: var(--mono); }
+  .pick-row td.status-short { color: var(--red); font-family: var(--mono); font-weight:700; }
+  .pick-row td.status-tbd { color: var(--amber); font-family: var(--mono); }
+
+  .empty { color: var(--text-dim); font-family: var(--mono); font-size: 12px; padding: 14px 0; }
+  .event-group-head { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); border-bottom: 1px solid var(--amber-dim); padding-bottom: 5px; margin: 18px 0 10px; }
+  .event-group-head:first-child { margin-top: 0; }
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--amber); color:#171615; font-family: var(--mono); font-size: 12px; padding: 10px 18px; border-radius: 3px; font-weight:700; opacity:0; pointer-events:none; transition: opacity .25s; }
+  .toast.show { opacity: 1; }
+
+  .note { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-top: 10px; line-height:1.5; }
+  .check-list { display:flex; flex-wrap:wrap; gap: 10px; margin-bottom: 12px; }
+  .check-list label { display:flex; align-items:center; gap: 5px; text-transform:none; font-family: var(--sans); color: var(--text); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <h1>Patch Sheet</h1>
+    <div class="tag">CHANNEL INPUT LIST &amp; GEAR PICK LIST</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="form">Performer Input List</button>
+    <button class="tab" data-tab="dash">AV Director Dashboard</button>
+  </div>
+
+  <!-- PERFORMER FORM -->
+  <div id="view-form">
+    <div id="form-closed-msg" class="panel" style="display:none;">
+      <h2>Not Currently Accepting Input Lists</h2>
+      <p style="margin:0; color:var(--text-dim); font-size:13px;">This input list isn't open right now. Check with your AV contact for the current link or an updated timeline.</p>
+    </div>
+    <div id="form-content">
+    <div class="panel">
+      <h2>Event / Act Details</h2>
+      <div class="grid2">
+        <div><label>Show Date</label><input type="date" id="f-date"></div>
+        <div><label>Event / Show Name</label><input type="text" id="f-event" placeholder="e.g. Fall Showcase, Late Set"></div>
+        <div><label>Performer / Band Name</label><input type="text" id="f-performer" placeholder="Your name or band"></div>
+        <div><label>Contact Email or Phone</label><input type="text" id="f-contact" placeholder="For patch questions"></div>
+        <div><label>Set Length / Notes</label><input type="text" id="f-setnotes" placeholder="e.g. 30 min set, 2 acoustic songs"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Channel List</h2>
+      <table id="ch-table">
+        <thead>
+          <tr>
+            <th>Ch</th>
+            <th>Source</th>
+            <th>Mic / Input Type</th>
+            <th>Preferred Model (optional)</th>
+            <th>Stand</th>
+            <th class="checkbox-cell">Phantom (48V)</th>
+            <th>Musician Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="ch-body"></tbody>
+      </table>
+      <div class="row-actions">
+        <button class="btn" id="add-row">+ Add Channel</button>
+      </div>
+    </div>
+
+    <div class="row-actions">
+      <button class="btn primary" id="submit-list">Submit Input List</button>
+    </div>
+    </div>
+  </div>
+
+  <!-- AV DASHBOARD -->
+  <div id="view-dash" style="display:none;">
+
+    <div id="dash-locked" class="panel">
+      <h2>AV Director Dashboard — Locked</h2>
+      <div class="grid2" style="align-items:end;">
+        <div><label>PIN</label><input type="text" id="dash-pin-input" placeholder="Enter PIN" autocomplete="off"></div>
+        <div><button class="btn primary" id="dash-unlock-btn">Unlock</button></div>
+      </div>
+      <div class="note">This PIN only hides the dashboard from casual access — it isn't real security.</div>
+    </div>
+
+    <div id="dash-unlocked" style="display:none;">
+    <div class="row-actions" style="justify-content:flex-end; margin-bottom:10px;">
+      <button class="btn" id="dash-lock-btn">Lock Dashboard</button>
+    </div>
+    <div class="sub-tabs">
+      <button class="sub-tab active" data-sub="submissions">Submissions</button>
+      <button class="sub-tab" data-sub="inventory">Gear Inventory</button>
+      <button class="sub-tab" data-sub="picklist">Pick List</button>
+    </div>
+
+    <div id="sub-submissions">
+      <div class="panel">
+        <h2>Submitted Input Lists</h2>
+        <div class="row-actions" style="margin-top:0; margin-bottom:14px;">
+          <button class="btn" id="refresh-subs-btn">Refresh</button>
+          <button class="btn" id="toggle-submissions-btn">Close Submissions</button>
+          <button class="btn danger" id="clear-all-subs">Clear All Submissions</button>
+        </div>
+        <div style="max-width:280px; margin-bottom:14px;">
+          <label>Filter by Event</label>
+          <select id="event-filter"></select>
+        </div>
+        <div id="submissions-list"></div>
+      </div>
+    </div>
+
+    <div id="sub-inventory" style="display:none;">
+      <div class="panel">
+        <h2>Gear Inventory</h2>
+        <div id="inventory-cats"></div>
+        <div class="note">Quantities here are what the pick list checks against. Edit and they save automatically. This inventory is visible to anyone with this link.</div>
+      </div>
+    </div>
+
+    <div id="sub-picklist" style="display:none;">
+      <div class="panel">
+        <h2>Generate Pick List</h2>
+        <div class="note" style="margin-top:0; margin-bottom:10px;">Choose which submissions to include, then generate. "House Choice" channels need manual assignment and are listed separately.</div>
+        <div class="check-list" id="pick-submission-checks"></div>
+        <div class="row-actions">
+          <button class="btn primary" id="gen-pick">Generate Pick List</button>
+          <button class="btn" id="print-pick">Print</button>
+        </div>
+      </div>
+      <div class="panel" id="pick-results-panel" style="display:none;">
+        <h2>Result</h2>
+        <table>
+          <thead><tr><th>Category</th><th>Needed</th><th>In Stock</th><th>Status</th></tr></thead>
+          <tbody id="pick-results-body"></tbody>
+        </table>
+        <div id="pick-tbd"></div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const MIC_CATS = [
+  "DI Box (Passive)",
+  "Line / Direct (no DI needed)",
+  "Bringing Own Mic",
+  "House Choice (engineer assigns)"
+];
+const GEAR_CATS = ["Dynamic Mic","Condenser Mic (Small Diaphragm)","Condenser Mic (Large Diaphragm)","Ribbon Mic","DI Box (Active)","DI Box (Passive)","Boom Stand (Short)","Boom Stand (Tall)","Straight Stand","Low-Profile / Kick Stand"];
+const STAND_TYPES = ["None","Straight Stand","Boom Stand (Tall)","Low-Profile / Kick Stand"];
+
+let inventory = null;
+let submissions = [];
+let chRowId = 0;
+let submissionsOpen = true;
+const DASH_PIN = "8888";
+let dashUnlocked = false;
+
+document.getElementById('dash-unlock-btn').addEventListener('click', tryUnlock);
+document.getElementById('dash-pin-input').addEventListener('keydown', e => { if(e.key === 'Enter') tryUnlock(); });
+function tryUnlock(){
+  const val = document.getElementById('dash-pin-input').value.trim();
+  if(val === DASH_PIN){
+    dashUnlocked = true;
+    document.getElementById('dash-locked').style.display = 'none';
+    document.getElementById('dash-unlocked').style.display = 'block';
+    document.getElementById('dash-pin-input').value = '';
+  } else {
+    toast('Incorrect PIN');
+  }
+}
+document.getElementById('dash-lock-btn').addEventListener('click', () => {
+  dashUnlocked = false;
+  document.getElementById('dash-locked').style.display = 'block';
+  document.getElementById('dash-unlocked').style.display = 'none';
+});
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+function defaultInventory(){
+  const inv = {};
+  GEAR_CATS.forEach(c => inv[c] = []);
+  return inv;
+}
+
+const API_URL = "https://script.google.com/macros/s/AKfycbwq5vfm1mIhc3mCGxkeAhH5jktN1yFSL6-XGovaU0NRng8ZixFM3C39pzHjsrwU32cU/exec";
+
+async function apiGet(){
+  const res = await fetch(API_URL + '?action=getData');
+  return res.json();
+}
+async function apiPost(payload){
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  });
+  return res.json();
+}
+
+async function loadAll(){
+  try {
+    const data = await apiGet();
+    inventory = data.inventory || defaultInventory();
+    submissions = data.submissions || [];
+    submissionsOpen = data.settings ? (data.settings.submissionsOpen !== false) : true;
+  } catch(e){
+    inventory = defaultInventory();
+    submissions = [];
+    submissionsOpen = true;
+    toast('Could not reach data source — check connection');
+  }
+  GEAR_CATS.forEach(c => { if(!inventory[c]) inventory[c] = []; });
+
+  renderInventory();
+  renderSubmissions();
+  renderPickChecklist();
+  renderFormOpenState();
+}
+
+async function saveSettings(){
+  try { await apiPost({ action:'setSettings', settings: { submissionsOpen } }); }
+  catch(e){ toast('Save failed — try again'); }
+}
+
+function renderFormOpenState(){
+  document.getElementById('form-closed-msg').style.display = submissionsOpen ? 'none' : 'block';
+  document.getElementById('form-content').style.display = submissionsOpen ? 'block' : 'none';
+  const btn = document.getElementById('toggle-submissions-btn');
+  if(btn) btn.textContent = submissionsOpen ? 'Close Submissions' : 'Open Submissions';
+}
+
+async function saveInventory(){
+  try { await apiPost({ action:'setInventory', inventory }); }
+  catch(e){ toast('Save failed — try again'); }
+}
+
+// ---------- Performer form ----------
+function optionsHtml(list, selected){
+  return list.map(v => `<option value="${v}" ${v===selected?'selected':''}>${v}</option>`).join('');
+}
+
+function addChannelRow(prefill){
+  chRowId++;
+  const id = chRowId;
+  const tbody = document.getElementById('ch-body');
+  const tr = document.createElement('tr');
+  tr.dataset.rowId = id;
+  const num = tbody.children.length + 1;
+  tr.innerHTML = `
+    <td class="ch-num">${num}</td>
+    <td><input type="text" class="c-source" placeholder="e.g. Lead Vocal, Kick In"></td>
+    <td><select class="c-mictype">${optionsHtml(MIC_CATS)}</select></td>
+    <td><input type="text" class="c-model" placeholder="e.g. SM58"></td>
+    <td><select class="c-stand">${optionsHtml(STAND_TYPES)}</select></td>
+    <td class="checkbox-cell"><input type="checkbox" class="c-phantom"></td>
+    <td><input type="text" class="c-musician" placeholder="Who plays this"></td>
+    <td><button class="btn small danger remove-row">✕</button></td>
+  `;
+  tbody.appendChild(tr);
+  tr.querySelector('.remove-row').addEventListener('click', () => {
+    tr.remove();
+    renumberRows();
+  });
+}
+function renumberRows(){
+  document.querySelectorAll('#ch-body tr').forEach((tr,i) => {
+    tr.querySelector('.ch-num').textContent = i+1;
+  });
+}
+
+document.getElementById('add-row').addEventListener('click', () => addChannelRow());
+
+document.getElementById('submit-list').addEventListener('click', async () => {
+  const performer = document.getElementById('f-performer').value.trim();
+  if(!performer){ toast('Add a performer / band name first'); return; }
+  const rows = [...document.querySelectorAll('#ch-body tr')];
+  if(rows.length === 0){ toast('Add at least one channel'); return; }
+
+  const channels = rows.map((tr,i) => ({
+    ch: i+1,
+    source: tr.querySelector('.c-source').value.trim() || `Channel ${i+1}`,
+    micType: tr.querySelector('.c-mictype').value,
+    model: tr.querySelector('.c-model').value.trim(),
+    stand: tr.querySelector('.c-stand').value,
+    phantom: tr.querySelector('.c-phantom').checked,
+    musician: tr.querySelector('.c-musician').value.trim()
+  }));
+
+  const submission = {
+    id: 'sub_' + Date.now(),
+    date: document.getElementById('f-date').value,
+    event: document.getElementById('f-event').value.trim(),
+    performer,
+    contact: document.getElementById('f-contact').value.trim(),
+    setNotes: document.getElementById('f-setnotes').value.trim(),
+    submittedAt: new Date().toISOString(),
+    channels
+  };
+
+  try {
+    await apiPost({ action:'submit', submission });
+    toast('Input list submitted — thanks!');
+    ['f-date','f-event','f-performer','f-contact','f-setnotes'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('ch-body').innerHTML = '';
+    chRowId = 0;
+    addChannelRow();
+  } catch(e){
+    toast('Submit failed — check connection and try again');
+  }
+});
+
+// ---------- Dashboard: submissions ----------
+document.getElementById('event-filter').addEventListener('change', renderSubmissions);
+
+document.getElementById('refresh-subs-btn').addEventListener('click', async () => {
+  await loadAll();
+  toast('Refreshed');
+});
+
+document.getElementById('toggle-submissions-btn').addEventListener('click', async () => {
+  submissionsOpen = !submissionsOpen;
+  await saveSettings();
+  renderFormOpenState();
+  toast(submissionsOpen ? 'Submissions open' : 'Submissions closed');
+});
+
+document.getElementById('clear-all-subs').addEventListener('click', async () => {
+  if(submissions.length === 0){ toast('Nothing to clear'); return; }
+  const ok = confirm(`Clear all ${submissions.length} submission(s)? This can't be undone.`);
+  if(!ok) return;
+  try {
+    await apiPost({ action:'clearAllSubmissions' });
+    submissions = [];
+    renderSubmissions();
+    renderPickChecklist();
+    toast('Input list cleared — ready for the next band');
+  } catch(e){
+    toast('Clear failed — check connection and try again');
+  }
+});
+
+function fmtDate(d){
+  if(!d) return '';
+  const dt = new Date(d + 'T00:00:00');
+  if(isNaN(dt)) return '';
+  return dt.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
+}
+function groupKey(sub){
+  return (sub.date || '9999-99-99') + '::' + (sub.event.trim() || '(No Event Set)');
+}
+function groupLabel(sub){
+  const d = fmtDate(sub.date);
+  const name = sub.event.trim() || '(No Event Set)';
+  return d ? `${d} — ${name}` : name;
+}
+
+function renderSubmissions(){
+  const filterEl = document.getElementById('event-filter');
+  const priorVal = filterEl.value;
+  const keyToLabel = {};
+  submissions.forEach(s => { keyToLabel[groupKey(s)] = groupLabel(s); });
+  const sortedKeys = Object.keys(keyToLabel).sort();
+  filterEl.innerHTML = '<option value="__all__">All Events</option>' + sortedKeys.map(k => `<option value="${k}">${keyToLabel[k]}</option>`).join('');
+  filterEl.value = sortedKeys.includes(priorVal) ? priorVal : '__all__';
+
+  const el = document.getElementById('submissions-list');
+  if(submissions.length === 0){
+    el.innerHTML = '<div class="empty">No input lists submitted yet.</div>';
+    return;
+  }
+
+  const activeFilter = filterEl.value;
+  const filtered = submissions.filter(s => activeFilter === '__all__' || groupKey(s) === activeFilter);
+  if(filtered.length === 0){
+    el.innerHTML = '<div class="empty">No submissions for this event.</div>';
+    return;
+  }
+
+  const groups = {};
+  filtered.forEach(s => {
+    const key = groupKey(s);
+    (groups[key] = groups[key] || []).push(s);
+  });
+
+  el.innerHTML = '';
+  Object.keys(groups).sort().forEach(key => {
+    const head = document.createElement('div');
+    head.className = 'event-group-head';
+    head.textContent = `${keyToLabel[key]} (${groups[key].length})`;
+    el.appendChild(head);
+    groups[key].slice().reverse().forEach(sub => el.appendChild(buildSubCard(sub)));
+  });
+}
+
+function buildSubCard(sub){
+    const card = document.createElement('div');
+    card.className = 'sub-card';
+    const date = new Date(sub.submittedAt);
+    card.innerHTML = `
+      <div class="sub-card-head">
+        <div>
+          <div class="name">${sub.performer}${sub.event ? ' — ' + sub.event : ''}</div>
+          <div class="meta">${sub.channels.length} ch${fmtDate(sub.date) ? ' · ' + fmtDate(sub.date) : ''} · submitted ${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div>
+        </div>
+        <button class="btn small danger del-sub">Delete</button>
+      </div>
+      <div class="sub-card-body">
+        <table>
+          <thead><tr><th>Ch</th><th>Source</th><th>Type</th><th>Model</th><th>Stand</th><th>48V</th><th>Musician</th></tr></thead>
+          <tbody>
+            ${sub.channels.map(c => `<tr>
+              <td class="ch-num">${c.ch}</td>
+              <td>${c.source}</td>
+              <td>${c.micType}</td>
+              <td>${c.model || '—'}</td>
+              <td>${c.stand}</td>
+              <td>${c.phantom ? '<span class="phantom-badge">48V</span>' : ''}</td>
+              <td>${c.musician || '—'}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+        ${sub.contact ? `<div class="note">Contact: ${sub.contact}</div>` : ''}
+        ${sub.setNotes ? `<div class="note">Notes: ${sub.setNotes}</div>` : ''}
+      </div>
+    `;
+    const head = card.querySelector('.sub-card-head');
+    const body = card.querySelector('.sub-card-body');
+    head.addEventListener('click', (e) => {
+      if(e.target.classList.contains('del-sub')) return;
+      body.classList.toggle('open');
+    });
+    card.querySelector('.del-sub').addEventListener('click', async (e) => {
+      e.stopPropagation();
+      try {
+        await apiPost({ action:'deleteSubmission', id: sub.id });
+        submissions = submissions.filter(s => s.id !== sub.id);
+        renderSubmissions();
+        renderPickChecklist();
+      } catch(err){
+        toast('Delete failed — check connection and try again');
+      }
+    });
+    return card;
+}
+
+// ---------- Dashboard: inventory ----------
+function renderInventory(){
+  const el = document.getElementById('inventory-cats');
+  el.innerHTML = '';
+  GEAR_CATS.forEach(cat => {
+    const wrap = document.createElement('div');
+    wrap.className = 'inv-cat';
+    wrap.innerHTML = `<h3>${cat}</h3><div class="items"></div><button class="btn small add-item">+ Add Item</button>`;
+    const itemsEl = wrap.querySelector('.items');
+    (inventory[cat] || []).forEach((item, idx) => {
+      itemsEl.appendChild(makeInvRow(cat, idx, item));
+    });
+    wrap.querySelector('.add-item').addEventListener('click', () => {
+      inventory[cat].push({ name: '', qty: 1 });
+      saveInventory();
+      renderInventory();
+    });
+    el.appendChild(wrap);
+  });
+}
+function makeInvRow(cat, idx, item){
+  const row = document.createElement('div');
+  row.className = 'inv-item-row';
+  row.innerHTML = `
+    <input type="text" class="name" placeholder="e.g. Shure SM58" value="${item.name || ''}">
+    <input type="text" class="qty" placeholder="Qty" value="${item.qty ?? 1}">
+    <button class="btn small danger del">✕</button>
+  `;
+  const nameInput = row.querySelector('.name');
+  const qtyInput = row.querySelector('.qty');
+  nameInput.addEventListener('change', () => { inventory[cat][idx].name = nameInput.value.trim(); saveInventory(); });
+  qtyInput.addEventListener('change', () => {
+    const n = parseInt(qtyInput.value, 10);
+    inventory[cat][idx].qty = isNaN(n) ? 0 : n;
+    saveInventory();
+  });
+  row.querySelector('.del').addEventListener('click', () => {
+    inventory[cat].splice(idx,1);
+    saveInventory();
+    renderInventory();
+  });
+  return row;
+}
+
+// ---------- Dashboard: pick list ----------
+function renderPickChecklist(){
+  const el = document.getElementById('pick-submission-checks');
+  if(submissions.length === 0){
+    el.innerHTML = '<div class="empty">No submissions to build a pick list from yet.</div>';
+    return;
+  }
+  el.innerHTML = submissions.map(s => `
+    <label><input type="checkbox" class="pick-check" value="${s.id}" checked> ${s.performer}${s.event ? ' — ' + s.event : ''}</label>
+  `).join('');
+}
+
+document.getElementById('gen-pick').addEventListener('click', () => {
+  const checked = [...document.querySelectorAll('.pick-check:checked')].map(c => c.value);
+  const included = submissions.filter(s => checked.includes(s.id));
+
+  const needed = {};
+  GEAR_CATS.forEach(c => needed[c] = 0);
+  let standNeeded = { "Boom Stand (Short)":0, "Boom Stand (Tall)":0, "Straight Stand":0, "Low-Profile / Kick Stand":0 };
+  let tbdList = [];
+
+  included.forEach(sub => {
+    sub.channels.forEach(ch => {
+      if(GEAR_CATS.includes(ch.micType)) needed[ch.micType]++;
+      if(ch.micType === "House Choice (engineer assigns)") tbdList.push(`${sub.performer} — Ch ${ch.ch} (${ch.source})`);
+      if(standNeeded.hasOwnProperty(ch.stand)) standNeeded[ch.stand]++;
+    });
+  });
+  Object.keys(standNeeded).forEach(k => needed[k] += standNeeded[k]);
+
+  const body = document.getElementById('pick-results-body');
+  body.innerHTML = '';
+  GEAR_CATS.forEach(cat => {
+    const inStock = (inventory[cat] || []).reduce((sum, i) => sum + (parseInt(i.qty,10) || 0), 0);
+    const need = needed[cat];
+    if(need === 0 && inStock === 0) return;
+    let statusClass = 'status-ok', statusText = 'OK';
+    if(need > inStock){ statusClass = 'status-short'; statusText = `SHORT ${need - inStock}`; }
+    const tr = document.createElement('tr');
+    tr.className = 'pick-row';
+    tr.innerHTML = `<td>${cat}</td><td>${need}</td><td>${inStock}</td><td class="${statusClass}">${statusText}</td>`;
+    body.appendChild(tr);
+  });
+
+  const tbdEl = document.getElementById('pick-tbd');
+  tbdEl.innerHTML = tbdList.length
+    ? `<div class="note" style="margin-top:14px;"><strong style="color:var(--amber)">Needs manual mic assignment:</strong><br>${tbdList.join('<br>')}</div>`
+    : '';
+
+  document.getElementById('pick-results-panel').style.display = 'block';
+});
+
+document.getElementById('print-pick').addEventListener('click', () => window.print());
+
+// ---------- Tabs ----------
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const t = btn.dataset.tab;
+    document.getElementById('view-form').style.display = t === 'form' ? 'block' : 'none';
+    document.getElementById('view-dash').style.display = t === 'dash' ? 'block' : 'none';
+    if(t === 'dash'){
+      document.getElementById('dash-locked').style.display = dashUnlocked ? 'none' : 'block';
+      document.getElementById('dash-unlocked').style.display = dashUnlocked ? 'block' : 'none';
+    }
+  });
+});
+document.querySelectorAll('.sub-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const s = btn.dataset.sub;
+    document.getElementById('sub-submissions').style.display = s === 'submissions' ? 'block' : 'none';
+    document.getElementById('sub-inventory').style.display = s === 'inventory' ? 'block' : 'none';
+    document.getElementById('sub-picklist').style.display = s === 'picklist' ? 'block' : 'none';
+  });
+});
+
+addChannelRow();
+loadAll();
+</script>
+</body>
+</html>
