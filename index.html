@@ -211,8 +211,11 @@
     <div id="sub-inventory" style="display:none;">
       <div class="panel">
         <h2>Gear Inventory</h2>
+        <div class="row-actions" style="margin-top:0; margin-bottom:14px;">
+          <button class="btn" id="refresh-inventory-btn">Refresh from Catalog</button>
+        </div>
         <div id="inventory-cats"></div>
-        <div class="note">Quantities here are what the pick list checks against. Edit and they save automatically. This inventory is visible to anyone with this link.</div>
+        <div class="note">This is a live read-out from your gear catalog (Catalog Import tab). Update quantities there, then hit Refresh to pull the latest numbers in — editing here isn't possible anymore since the catalog is the source of truth.</div>
       </div>
     </div>
 
@@ -335,11 +338,6 @@ function renderFormOpenState(){
   document.getElementById('form-content').style.display = submissionsOpen ? 'block' : 'none';
   const btn = document.getElementById('toggle-submissions-btn');
   if(btn) btn.textContent = submissionsOpen ? 'Close Submissions' : 'Open Submissions';
-}
-
-async function saveInventory(){
-  try { await apiPost({ action:'setInventory', inventory }); }
-  catch(e){ toast('Save failed — try again'); }
 }
 
 // ---------- Performer form ----------
@@ -556,44 +554,28 @@ function renderInventory(){
   const el = document.getElementById('inventory-cats');
   el.innerHTML = '';
   GEAR_CATS.forEach(cat => {
+    const items = inventory[cat] || [];
+    if(items.length === 0) return;
     const wrap = document.createElement('div');
     wrap.className = 'inv-cat';
-    wrap.innerHTML = `<h3>${cat}</h3><div class="items"></div><button class="btn small add-item">+ Add Item</button>`;
-    const itemsEl = wrap.querySelector('.items');
-    (inventory[cat] || []).forEach((item, idx) => {
-      itemsEl.appendChild(makeInvRow(cat, idx, item));
-    });
-    wrap.querySelector('.add-item').addEventListener('click', () => {
-      inventory[cat].push({ name: '', qty: 1 });
-      saveInventory();
-      renderInventory();
-    });
+    const rowsHtml = items.map(item => `
+      <div class="inv-item-row" style="justify-content:space-between;">
+        <span>${item.name || '(unnamed item)'}</span>
+        <span style="font-family: var(--mono); color: var(--amber);">${item.qty ?? 0}</span>
+      </div>
+    `).join('');
+    wrap.innerHTML = `<h3>${cat}</h3>${rowsHtml}`;
     el.appendChild(wrap);
   });
+  if(el.innerHTML === ''){
+    el.innerHTML = '<div class="empty">No catalog items are tagged with a Pick List Category yet.</div>';
+  }
 }
-function makeInvRow(cat, idx, item){
-  const row = document.createElement('div');
-  row.className = 'inv-item-row';
-  row.innerHTML = `
-    <input type="text" class="name" placeholder="e.g. Shure SM58" value="${item.name || ''}">
-    <input type="text" class="qty" placeholder="Qty" value="${item.qty ?? 1}">
-    <button class="btn small danger del">✕</button>
-  `;
-  const nameInput = row.querySelector('.name');
-  const qtyInput = row.querySelector('.qty');
-  nameInput.addEventListener('change', () => { inventory[cat][idx].name = nameInput.value.trim(); saveInventory(); });
-  qtyInput.addEventListener('change', () => {
-    const n = parseInt(qtyInput.value, 10);
-    inventory[cat][idx].qty = isNaN(n) ? 0 : n;
-    saveInventory();
-  });
-  row.querySelector('.del').addEventListener('click', () => {
-    inventory[cat].splice(idx,1);
-    saveInventory();
-    renderInventory();
-  });
-  return row;
-}
+
+document.getElementById('refresh-inventory-btn').addEventListener('click', async () => {
+  await loadAll();
+  toast('Inventory refreshed from catalog');
+});
 
 // ---------- Dashboard: pick list ----------
 function renderPickChecklist(){
