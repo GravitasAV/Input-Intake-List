@@ -1,6 +1,6 @@
 Item ID,Sub-Category,Item Name,Make / Model,Serial / Asset Tag,Quantity,Condition,Storage Location,Location Code,Notes
-DLY-MIC-CLST-AR1-001,Microphones,SM58,Shure SM58,SM58-0417,6,Good,AV Closet – Audio Rack 1,CLST-AR1,"Vocal mics, main set"
-DLY-MIC-CLST-AR1-002,Microphones,Beta 58A,Shure Beta 58A,B58-1122,2,Good,AV Closet – Audio Rack 1,CLST-AR1,Backup vocal mics
+DLY-MIC-CLST-AR1-001,Microphones,SM58,Shure SM58,SM58-0417,2,Good,AV Closet – Audio Rack 1,CLST-AR1,"Vocal mics, main set"
+DLY-MIC-CLST-AR1-002,Microphones,Beta 58A,Shure Beta 58A,B58-1122,4,Good,AV Closet – Audio Rack 1,CLST-AR1,Backup vocal mics
 DLY-CBL-CLST-FLL-001,Cables,XLR 25ft,XLR Cable 25ft,,20,Good,AV Closet – Floor Left,CLST-FLL,Mic cable run
 DLY-CBL-CLST-FLL-002,Cables,XLR 10ft,XLR Cable 10ft,,15,Fair,AV Closet – Floor Left,CLST-FLL,"2 showing wear, flag for replacement"
 DLY-DI-CLST-AR2-001,DI Boxes,ProDI,Radial ProDI,RDI-3391,4,Excellent,AV Closet – Audio Rack 2,CLST-AR2,
@@ -9,3 +9,5 @@ DLY-WL-CLST-AR2-001,Wireless Systems,SLXD24 Handheld,Shure SLXD24,SLX-8842,2,Goo
 DLY-SNK-CLST-FLR-001,Snakes / Multicore,32ch Snake 100ft,32ch Snake 100ft,SNK-100-01,1,Good,AV Closet – Floor Right,CLST-FLR,
 DLY-CASE-CLST-FLL-001,Cases,Mic Case,SKB,,3,Good,AV Closet – Floor Left,CLST-FLL,Holds 12 mics each
 DLY-MON-CLST-FLR-001,Monitor Wedges,KW122 Wedge,QSC KW122,KW-7701,4,Good,AV Closet – Floor Right,CLST-FLR,
+DLY-MIC-CLST-AR1-003,Microphones,SM57,Shure SM57,,2,Excellent,AV Closet – Audio Rack 1,CLST-AR1,
+DLY-MIC-CLST-AR1-004,Microphones,E906 Instrument Mic,Sennheiser e906,,1,Excellent,AV Closet – Audio Rack 1,CLST-AR1,
