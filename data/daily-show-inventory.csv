@@ -1,13 +1,22 @@
 Item ID,Sub-Category,Item Name,Make / Model,Serial / Asset Tag,Quantity,Condition,Storage Location,Location Code,Notes
 DLY-MIC-CLST-AR1-001,Microphones,SM58,Shure SM58,SM58-0417,2,Good,AV Closet – Audio Rack 1,CLST-AR1,"Vocal mics, main set"
-DLY-MIC-CLST-AR1-002,Microphones,Beta 58A,Shure Beta 58A,B58-1122,4,Good,AV Closet – Audio Rack 1,CLST-AR1,Backup vocal mics
-DLY-CBL-CLST-FLL-001,Cables,XLR 25ft,XLR Cable 25ft,,20,Good,AV Closet – Floor Left,CLST-FLL,Mic cable run
-DLY-CBL-CLST-FLL-002,Cables,XLR 10ft,XLR Cable 10ft,,15,Fair,AV Closet – Floor Left,CLST-FLL,"2 showing wear, flag for replacement"
-DLY-DI-CLST-AR2-001,DI Boxes,ProDI,Radial ProDI,RDI-3391,4,Excellent,AV Closet – Audio Rack 2,CLST-AR2,
-DLY-STND-CLST-FLR-001,Stands,Tall Boom Stand,K&M 210/9,,8,Good,AV Closet – Floor Right,CLST-FLR,
-DLY-WL-CLST-AR2-001,Wireless Systems,SLXD24 Handheld,Shure SLXD24,SLX-8842,2,Good,AV Closet – Audio Rack 2,CLST-AR2,Handheld sets w/ receivers
-DLY-SNK-CLST-FLR-001,Snakes / Multicore,32ch Snake 100ft,32ch Snake 100ft,SNK-100-01,1,Good,AV Closet – Floor Right,CLST-FLR,
-DLY-CASE-CLST-FLL-001,Cases,Mic Case,SKB,,3,Good,AV Closet – Floor Left,CLST-FLL,Holds 12 mics each
-DLY-MON-CLST-FLR-001,Monitor Wedges,KW122 Wedge,QSC KW122,KW-7701,4,Good,AV Closet – Floor Right,CLST-FLR,
+DLY-MIC-CLST-AR1-002,Microphones,Shure Wireless,Shure QLXD 87a,B58-1122,4,Good,AV Closet – Audio Rack 1,CLST-AR1,Backup vocal mics
+DLY-CBL-CLST-AR1-001,Cables,XLR 25ft,XLR Cable 25ft,,20,Good,AV Closet – Audio Rack 1,CLST-AR1,Mic cable run
+DLY-CBL-CLST-AR1-002,Cables,XLR 10ft,XLR Cable 10ft,,15,Fair,AV Closet – Audio Rack 1,CLST-AR1,"2 showing wear, flag for replacement"
+DLY-DI-CLST-AR1-001,DI Boxes,DI Stereo,Radial Pro D2,RDI-3391,1,Excellent,AV Closet – Audio Rack 1,CLST-AR1,
+DLY-STND-CLST-FLR-001,Stands,Tall Straight Stand,K&M 210/9,,8,Good,AV Closet – Floor Right,CLST-FLR,
+DLY-SNK-CLST-AR2-001,Snakes / Multicore,12ch Snake 25ft,Whirlwind 12ch Snk,SNK-25-01,1,Good,AV Closet – Audio Rack 2,CLST-AR2,
+DLY-MON-CLST-FLR-001,Monitor Wedges,10” Wedge,QSC K10.2,,1,Good,AV Closet – Floor Right,CLST-FLR,@dj booths
 DLY-MIC-CLST-AR1-003,Microphones,SM57,Shure SM57,,2,Excellent,AV Closet – Audio Rack 1,CLST-AR1,
 DLY-MIC-CLST-AR1-004,Microphones,E906 Instrument Mic,Sennheiser e906,,1,Excellent,AV Closet – Audio Rack 1,CLST-AR1,
+DLY-DI-CLST-AR1-002,DI Boxes,DI Multi Media,Radial Pro AV2,,1,Excellent,AV Closet – Audio Rack 1,CLST-AR1,
+DLY-DI-CLST-AR1-003,DI Boxes,DI Mono,Radial Pro DI,,2,Excellent,AV Closet – Audio Rack 1,CLST-AR1,1 belongs to ak
+DLY-MISC-CLST-AR2-001,Misc Daily,Power Strip,Furman SS-6B,,4,Good,AV Closet – Audio Rack 2,CLST-AR2,
+DLY-MIC-CLST-AR1-005,Microphones,Drum Mic Kit,Sennheiser e600,,1,Excellent,AV Closet – Audio Rack 1,CLST-AR1,
+DLY-MON-CLST-AR1-001,Monitor Wedges,8” Wedge,QSC K8.2,,1,Good,AV Closet – Audio Rack 1,CLST-AR1,
+DLY-MON-CLST-FLL-001,Monitor Wedges,Stage Wedge,EAW Microwedge,,5,Excellent,AV Closet – Floor Left,CLST-FLL,
+DLY-STND-CLST-FLR-002,Stands,Tall Boom Stand,K&M 210/9,,1,Good,AV Closet – Floor Right,CLST-FLR,
+DLY-STND-CLST-AR1-001,Stands,Short Boom Stand,K&M Short Boom,,1,Good,AV Closet – Audio Rack 1,CLST-AR1,
+DLY-STND-CLST-AR1-002,Stands,Short Straight Stand,K&M Short Straight,,5,Excellent,AV Closet – Audio Rack 1,CLST-AR1,
+DLY-CBL-CLST-AR2-001,Cables,Breakout - Usb C to XLR,Usb c to XLR,,3,Excellent,AV Closet – Audio Rack 2,CLST-AR2,
+DLY-CBL-CLST-AR2-002,Cables,Breakout - 1/8” to XLR,1/8” to XLR,,2,Excellent,AV Closet – Audio Rack 2,CLST-AR2,

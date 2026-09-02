@@ -1,13 +1,21 @@
 Gear Name (what performers see),Sub-Category,Total Qty On Hand,Sample Item ID (for AV tech reference),Notes,Pick List Category
 Shure SM58,Microphones,2,DLY-MIC-CLST-AR1-001,,
-Shure Beta 58A,Microphones,4,DLY-MIC-CLST-AR1-002,,
-XLR Cable 25ft,Cables,20,DLY-CBL-CLST-FLL-001,,
-XLR Cable 10ft,Cables,15,DLY-CBL-CLST-FLL-002,,
-Radial ProDI,DI Boxes,4,DLY-DI-CLST-AR2-001,,DI Box (Passive)
-K&M 210/9,Stands,8,DLY-STND-CLST-FLR-001,,Boom Stand (Tall)
-Shure SLXD24,Wireless Systems,2,DLY-WL-CLST-AR2-001,,
-32ch Snake 100ft,Snakes / Multicore,1,DLY-SNK-CLST-FLR-001,,
-SKB,Cases,3,DLY-CASE-CLST-FLL-001,,
-QSC KW122,Monitor Wedges,4,DLY-MON-CLST-FLR-001,,
+Shure QLXD 87a,Microphones,4,DLY-MIC-CLST-AR1-002,,
+XLR Cable 25ft,Cables,20,DLY-CBL-CLST-AR1-001,,
+XLR Cable 10ft,Cables,15,DLY-CBL-CLST-AR1-002,,
+Radial Pro D2,DI Boxes,1,DLY-DI-CLST-AR1-001,,DI Box (Passive)
+K&M 210/9,Stands,9,DLY-STND-CLST-FLR-001,,Boom Stand (Tall)
+Whirlwind 12ch Snk,Snakes / Multicore,1,DLY-SNK-CLST-AR2-001,,
+QSC K10.2,Monitor Wedges,1,DLY-MON-CLST-FLR-001,,
 Shure SM57,Microphones,2,DLY-MIC-CLST-AR1-003,,
 Sennheiser e906,Microphones,1,DLY-MIC-CLST-AR1-004,,
+Radial Pro AV2,DI Boxes,1,DLY-DI-CLST-AR1-002,,
+Radial Pro DI,DI Boxes,2,DLY-DI-CLST-AR1-003,,
+Furman SS-6B,Misc Daily,4,DLY-MISC-CLST-AR2-001,,
+Sennheiser e600,Microphones,1,DLY-MIC-CLST-AR1-005,,
+QSC K8.2,Monitor Wedges,1,DLY-MON-CLST-AR1-001,,
+EAW Microwedge,Monitor Wedges,5,DLY-MON-CLST-FLL-001,,
+K&M Short Boom,Stands,1,DLY-STND-CLST-AR1-001,,
+K&M Short Straight,Stands,5,DLY-STND-CLST-AR1-002,,
+Usb c to XLR,Cables,3,DLY-CBL-CLST-AR2-001,,
+1/8” to XLR,Cables,2,DLY-CBL-CLST-AR2-002,,
